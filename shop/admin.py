@@ -5,11 +5,11 @@ from .models import Category, Product
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)                      # отображать имя
-    search_fields = ('name',)                     # поиск по имени
+    list_display = ('name',)                      
+    search_fields = ('name',)                    
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'price', 'created_at')  # отображаемые поля
-    search_fields = ('name',)                                  # поле поиска
-    list_filter = ('category', 'created_at')                   # фильтры справа
+    list_display = ('name', 'category', 'price', 'created_at')  
+    search_fields = ('name',)                                 
+    list_filter = ('category', 'created_at')                   
