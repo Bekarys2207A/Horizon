@@ -1,0 +1,24 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<h2>Список товаров</h2>
+<a href="{% url 'product-create' %}" class="btn btn-primary mb-3">Добавить товар</a>
+<ul class="list-group">
+    {% for product in products %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+            <strong>{{ product.name }}</strong><br>
+            {{ product.description }}<br>
+            Категория: {{ product.category }}<br>
+            Цена: {{ product.price }} ₸<br>
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
+            {% endif %}
+        </div>
+        <div>
+            <a href="{% url 'product-update' product.pk %}" class="btn btn-warning btn-sm">Редактировать</a>
+            <a href="{% url 'product-delete' product.pk %}" class="btn btn-danger btn-sm">Удалить</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
