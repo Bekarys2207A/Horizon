@@ -1,0 +1,10 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<h2>{{ view.object.pk|yesno:"Редактировать товар,Добавить товар" }}</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Сохранить</button>
+</form>
+<a href="{% url 'product-list' %}" class="btn btn-secondary mt-2">Назад</a>
+{% endblock %}
