@@ -8,6 +8,11 @@ from .forms import ProductForm
 
 # Create your views here.
 
+from django.shortcuts import render
+
+from django.shortcuts import render
+from .models import Product
+
 def home(request):
     products = Product.objects.all()
     return render(request, 'shop/home.html', {'products': products})

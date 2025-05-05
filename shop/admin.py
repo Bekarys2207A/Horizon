@@ -12,4 +12,5 @@ class CategoryAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'price', 'created_at')  
     search_fields = ('name',)                                 
-    list_filter = ('category', 'created_at')                   
+    list_filter = ('category', 'created_at')
+    fields = ('name', 'category', 'price', 'description', 'image')  # Добавляем поле image             
