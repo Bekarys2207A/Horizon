@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+AUTH_USER_MODEL = 'user.User'
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -52,13 +53,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'horizweb.urls'
 
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -131,3 +137,15 @@ import os
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 465  # Порт для SSL
+EMAIL_USE_SSL = True  # Используем SSL вместо TLS
+EMAIL_HOST_USER = 'bekarys22072007@mail.ru'  # Ваш email
+EMAIL_HOST_PASSWORD = 'rfbn7CccgFsvbuuT4ua8'  # Пароль от вашего email
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+LOGIN_REDIRECT_URL = 'home'  # Перенаправление после входа
+LOGOUT_REDIRECT_URL = 'home'  # Перенаправление после выхода

@@ -1,0 +1,21 @@
+<!-- filepath: /Users/bekarys/Documents/HorizonProjects/templates/shop/home.html -->
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<h1>Добро пожаловать в наш магазин!</h1>
+<ul>
+    {% for product in products %}
+        <li> 
+            <h3>{{ product.name }}</h3>
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; max-height: 200px;">
+            {% endif %}
+            <p>Категория: {{ product.category.name }}</p>
+            <p>Цена: {{ product.price }}₸</p>
+            <p>Описание: {{ product.description }}</p>
+        </li>
+    {% empty %}
+        <li>Нет доступных товаров.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
