@@ -1,21 +1,95 @@
-<!-- filepath: /Users/bekarys/Documents/HorizonProjects/templates/shop/home.html -->
 {% extends 'shop/base.html' %}
 
 {% block content %}
-<h1>Добро пожаловать в наш магазин!</h1>
-<ul>
+<h1 class="mb-5 text-center fw-bold">Все товары</h1>
+<div class="mb-4 d-flex justify-content-end">
+    <form method="get" style="max-width:400px;">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Поиск товара..." value="{{ request.GET.q }}">
+            <button class="btn btn-primary" type="submit">Найти</button>
+        </div>
+    </form>
+</div>
+{% if user.is_authenticated and user.is_seller %}
+    <div class="mb-4 text-end">
+        <a href="{% url 'product-create' %}" class="btn btn-success">Добавить товар</a>
+    </div>
+{% endif %}
+
+<div class="row">
     {% for product in products %}
-        <li> 
-            <h3>{{ product.name }}</h3>
-            {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; max-height: 200px;">
-            {% endif %}
-            <p>Категория: {{ product.category.name }}</p>
-            <p>Цена: {{ product.price }}₸</p>
-            <p>Описание: {{ product.description }}</p>
-        </li>
+        <div class="col-md-4 mb-4 d-flex align-items-stretch">
+            <div class="card shadow-lg border-0 rounded-4 w-100 d-flex flex-column product-card">
+                {% if product.image %}
+                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 250px; overflow: hidden;">
+                        <img src="{{ product.image.url }}" class="img-fluid product-img" alt="{{ product.name }}">
+                    </div>
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-center mb-3">{{ product.name }}</h5>
+                    <div class="mt-auto text-center">
+                        <a href="{% url 'product-detail' product.id %}" class="btn btn-gradient px-4 py-2 rounded-pill" target="_blank">
+                            Смотреть товар
+                        </a>
+                        {% if user.is_authenticated and user.is_seller %}
+                            <a href="{% url 'product-update' product.id %}" class="btn btn-warning ms-2">Изменить</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
     {% empty %}
-        <li>Нет доступных товаров.</li>
+        <div class="col-12">
+            <p class="text-center">Нет доступных товаров.</p>
+        </div>
     {% endfor %}
-</ul>
+</div>
+
+<style>
+    .product-img {
+        transition: transform 0.4s ease;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    /* Карточка становится "глубже" */
+    .product-card {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card:hover .product-img {
+        transform: scale(1.08);
+    }
+
+    /* Градиентная кнопка с плавным ховером и нажатием */
+    .btn-gradient {
+        background: linear-gradient(90deg, #0d6efd, #6610f2);
+        color: white;
+        font-weight: 500;
+        border: none;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.25);
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: scale(1);
+    }
+
+    .btn-gradient:hover {
+        background: linear-gradient(90deg, #6610f2, #0d6efd);
+        transform: scale(1.08);
+        box-shadow: 0 8px 24px rgba(13, 110, 253, 0.35);
+        color: white;
+    }
+
+    .btn-gradient:active {
+        transform: scale(0.96);
+        background: linear-gradient(90deg, #4b00e0, #007bff);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.15s ease-in-out;
+    }
+</style>
 {% endblock %}
