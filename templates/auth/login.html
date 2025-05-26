@@ -1,8 +1,125 @@
 {% extends 'shop/base.html' %}
 
 {% block content %}
+<style>
+/* Анимация появления формы */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Контейнер формы */
+form {
+    max-width: 480px;
+    margin: 60px auto 70px;
+    padding: 35px 40px;
+    background: linear-gradient(135deg, #f0f4ff 0%, #d9e4ff 100%);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 22px rgba(0, 0, 0, 0.1),
+      0 0 35px rgba(102, 126, 234, 0.3);
+    animation: fadeInUp 0.8s ease forwards;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Заголовок */
+h2 {
+    text-align: center;
+    color: #1c2b46;
+    font-weight: 700;
+    font-size: 2.3rem;
+    margin-bottom: 38px;
+    letter-spacing: 1.2px;
+}
+
+/* Поля ввода */
+.mb-3 {
+    margin-bottom: 28px;
+}
+
+label.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #344767;
+    font-size: 1.05rem;
+}
+
+input.form-control {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 16px;
+    border: 2px solid #c3cfe2;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: inherit;
+    color: #1a202c;
+    outline: none;
+}
+
+/* Эффект фокуса */
+input.form-control:focus {
+    border-color: #5a67d8;
+    box-shadow: 0 0 10px rgba(90, 103, 216, 0.6);
+}
+
+/* Кнопка */
+button.btn-primary {
+    width: 100%;
+    padding: 15px 0;
+    font-size: 19px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 0 12px 26px rgba(102, 126, 234, 0.5);
+    transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+    letter-spacing: 1.2px;
+    user-select: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button.btn-primary:hover {
+    background: linear-gradient(45deg, #764ba2, #667eea);
+    box-shadow: 0 18px 38px rgba(118, 75, 162, 0.7);
+    transform: translateY(-3px);
+}
+
+button.btn-primary:active {
+    transform: translateY(2px);
+    box-shadow: 0 8px 18px rgba(118, 75, 162, 0.5);
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 600px) {
+    form {
+        margin: 30px 15px 40px;
+        padding: 28px 25px;
+        border-radius: 14px;
+    }
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 28px;
+    }
+    button.btn-primary {
+        font-size: 17px;
+        padding: 13px 0;
+    }
+}
+</style>
+
 <h2>Вход</h2>
-<form method="post">
+<form method="post" novalidate>
     {% csrf_token %}
     <div class="mb-3">
         <label for="username" class="form-label">Email</label>

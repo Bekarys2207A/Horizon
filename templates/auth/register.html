@@ -1,8 +1,155 @@
 {% extends 'shop/base.html' %}
 
 {% block content %}
+<style>
+/* Анимация появления формы */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Контейнер формы */
+form {
+    width: 100%;
+    max-width: 550px;
+    margin: 50px auto 60px;
+    padding: 40px 50px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+    border-radius: 18px;
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.12),
+      0 0 30px rgba(106, 132, 255, 0.3);
+    animation: fadeInUp 0.9s ease forwards;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: box-shadow 0.3s ease;
+}
+
+/* При наведении на форму — лёгкая подсветка */
+form:hover {
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.16),
+      0 0 40px rgba(106, 132, 255, 0.5);
+}
+
+/* Заголовок */
+h2 {
+    text-align: center;
+    color: #1a202c;
+    font-weight: 800;
+    font-size: 2.4rem;
+    margin-bottom: 40px;
+    letter-spacing: 1.5px;
+}
+
+/* Отступы между полями */
+form p {
+    margin-bottom: 28px;
+}
+
+/* Стили полей ввода */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 17px;
+    border: 2.5px solid #cbd5e1; /* светлый синий-серый */
+    border-radius: 14px;
+    background-color: #ffffff;
+    transition: all 0.35s ease;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+    outline: none;
+    font-family: inherit;
+    color: #2d3748;
+}
+
+/* Эффект при фокусе */
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form select:focus,
+form textarea:focus {
+    border-color: #667eea; /* нежный синий */
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.7);
+    background-color: #fff;
+    color: #1a202c;
+}
+
+/* Ошибки */
+.errorlist {
+    color: #e53e3e;
+    font-size: 15px;
+    margin-top: 8px;
+    margin-bottom: 0;
+    list-style: none;
+    padding-left: 0;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Выровнять ошибки */
+.errorlist li {
+    margin-left: 6px;
+}
+
+/* Кнопка */
+button.btn-primary {
+    width: 100%;
+    padding: 17px 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    box-shadow: 0 12px 25px rgba(102, 126, 234, 0.5);
+    transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 1.3px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+}
+
+/* Анимация при наведении на кнопку */
+button.btn-primary:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    box-shadow: 0 18px 35px rgba(118, 75, 162, 0.7);
+    transform: translateY(-4px);
+}
+
+/* Нажатие кнопки */
+button.btn-primary:active {
+    transform: translateY(2px);
+    box-shadow: 0 8px 18px rgba(118, 75, 162, 0.5);
+}
+
+/* Мобильная адаптация */
+@media (max-width: 600px) {
+    form {
+        padding: 30px 25px;
+        margin: 30px 15px 40px;
+        border-radius: 14px;
+    }
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 25px;
+    }
+    button.btn-primary {
+        font-size: 18px;
+        padding: 14px 0;
+    }
+}
+</style>
+
 <h2>Регистрация</h2>
-<form method="post">
+<form method="post" novalidate>
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Зарегистрироваться</button>

@@ -68,6 +68,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'shop.context_processors.categories', 
+                'shop.context_processors.cart_count',  
             ],
         },
     },
@@ -139,13 +141,17 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+import certifi
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_PORT = 465  # Порт для SSL
-EMAIL_USE_SSL = True  # Используем SSL вместо TLS
-EMAIL_HOST_USER = 'bekarys22072007@mail.ru'  # Ваш email
-EMAIL_HOST_PASSWORD = 'rfbn7CccgFsvbuuT4ua8'  # Пароль от вашего email
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'bekarys22072007@mail.ru'
+EMAIL_HOST_PASSWORD = 'rfbn7CccgFsvbuuT4ua8'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 LOGIN_REDIRECT_URL = 'home'  # Перенаправление после входа
 LOGOUT_REDIRECT_URL = 'home'  # Перенаправление после выхода
