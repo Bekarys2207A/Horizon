@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2 class="text-center mb-5 fw-bold" style="font-size: 2.5rem; color: #212529;">
-    Товары категории «{{ category.name }}»
+    {% blocktrans %}Товары категории «{{ category.name }}»{% endblocktrans %}
 </h2>
 
 <div class="row g-4">
@@ -23,13 +23,13 @@
                        target="_blank"
                        class="btn btn-gradient rounded-pill px-4 py-2 mt-auto"
                        style="background: linear-gradient(90deg, #0d6efd, #6610f2); color: white; font-weight: 500; transition: 0.3s ease;">
-                        Смотреть товар
+                        {% trans "Смотреть товар" %}
                     </a>
                 </div>
             </div>
         </div>
     {% empty %}
-        <p class="text-muted text-center">В этой категории пока нет товаров.</p>
+        <p class="text-muted text-center">{% trans "В этой категории пока нет товаров." %}</p>
     {% endfor %}
 </div>
 

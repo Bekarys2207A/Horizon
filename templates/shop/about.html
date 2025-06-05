@@ -1,9 +1,10 @@
 {% extends 'shop/base.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class="content-box">
-    <h1 class="mb-4">О нас</h1>
-    <p>Это страница с информацией о магазине.</p>
+    <h1 class="mb-4">{% trans "О нас" %}</h1>
+    <p>{% trans "Это страница с информацией о магазине." %}</p>
 </div>
 {% endblock %}
 
@@ -12,8 +13,8 @@
     <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
         <span class="text-muted">&copy; 2025 horizon.com</span>
         <div>
-            <a href="mailto:help@horizon.com" class="text-decoration-none me-3">Help</a>
-            <a href="#" class="text-decoration-none">Политика конфиденциальности</a>
+            <a href="mailto:help@horizon.com" class="text-decoration-none me-3">{% trans "Помощь" %}</a>
+            <a href="#" class="text-decoration-none">{% trans "Политика конфиденциальности" %}</a>
         </div>
     </div>
 </footer>

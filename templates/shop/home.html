@@ -1,18 +1,21 @@
 {% extends 'shop/base.html' %}
+{% load i18n %}
 
 {% block content %}
-<h1 class="mb-5 text-center fw-bold">Все товары</h1>
+<h1 class="mb-5 text-center fw-bold">{% trans "Все товары" %}</h1>
+
 <div class="mb-4 d-flex justify-content-end">
     <form method="get" style="max-width:400px;">
         <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="Поиск товара..." value="{{ request.GET.q }}">
-            <button class="btn btn-primary" type="submit">Найти</button>
+            <input type="text" name="q" class="form-control" placeholder="{% trans 'Поиск товара...' %}" value="{{ request.GET.q }}">
+            <button class="btn btn-primary" type="submit">{% trans "Найти" %}</button>
         </div>
     </form>
 </div>
+
 {% if user.is_authenticated and user.is_seller %}
     <div class="mb-4 text-end">
-        <a href="{% url 'product-create' %}" class="btn btn-success">Добавить товар</a>
+        <a href="{% url 'product-create' %}" class="btn btn-success">{% trans "Добавить товар" %}</a>
     </div>
 {% endif %}
 
@@ -29,10 +32,10 @@
                     <h5 class="card-title text-center mb-3">{{ product.name }}</h5>
                     <div class="mt-auto text-center">
                         <a href="{% url 'product-detail' product.id %}" class="btn btn-gradient px-4 py-2 rounded-pill" target="_blank">
-                            Смотреть товар
+                            {% trans "Смотреть товар" %}
                         </a>
                         {% if user.is_authenticated and user.is_seller %}
-                            <a href="{% url 'product-update' product.id %}" class="btn btn-warning ms-2">Изменить</a>
+                            <a href="{% url 'product-update' product.id %}" class="btn btn-warning ms-2">{% trans "Изменить" %}</a>
                         {% endif %}
                     </div>
                 </div>
@@ -40,7 +43,7 @@
         </div>
     {% empty %}
         <div class="col-12">
-            <p class="text-center">Нет доступных товаров.</p>
+            <p class="text-center">{% trans "Нет доступных товаров." %}</p>
         </div>
     {% endfor %}
 </div>
@@ -53,7 +56,6 @@
         object-fit: contain;
     }
 
-    /* Карточка становится "глубже" */
     .product-card {
         transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
@@ -67,7 +69,6 @@
         transform: scale(1.08);
     }
 
-    /* Градиентная кнопка с плавным ховером и нажатием */
     .btn-gradient {
         background: linear-gradient(90deg, #0d6efd, #6610f2);
         color: white;

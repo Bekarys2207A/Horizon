@@ -1,12 +1,12 @@
 {% extends 'shop/base.html' %}
 
 {% block content %}
-<h2>Активация аккаунта</h2>
+<h2>{% trans "Активация аккаунта" %}</h2>
 <form method="post">
     {% csrf_token %}
-    <label for="activation_code">Введите код активации:</label>
+    <label for="activation_code">{% trans "Введите код активации:" %}</label>
     <input type="text" name="activation_code" id="activation_code" class="form-control">
-    <button type="submit" class="btn btn-primary mt-3">Активировать</button>
+    <button type="submit" class="btn btn-primary mt-3">{% trans "Активировать" %}</button>
 </form>
 {% if error %}
 <p class="text-danger">{{ error }}</p>

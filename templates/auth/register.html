@@ -148,10 +148,10 @@ button.btn-primary:active {
 }
 </style>
 
-<h2>Регистрация</h2>
+<h2>{% trans "Регистрация" %}</h2>
 <form method="post" novalidate>
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+    <button type="submit" class="btn btn-primary">{% trans "Зарегистрироваться" %}</button>
 </form>
-{% endblock %}
+

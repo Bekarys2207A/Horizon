@@ -1,8 +1,8 @@
 from django.db import models
 
-# Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name="Название категории")
+    description = models.TextField(blank=True, verbose_name="Описание категории")  
     slug = models.SlugField(unique=True, blank=True, null=True)
 
     class Meta:
@@ -26,4 +26,4 @@ class Product(models.Model):
         verbose_name_plural = "Товары"
 
     def __str__(self):
-        return self.name 
+        return self.name

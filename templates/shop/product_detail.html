@@ -1,4 +1,5 @@
 {% extends 'shop/base.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class="container my-5">
@@ -14,25 +15,24 @@
         <div class="card-body p-5">
             <h2 class="card-title fw-bold mb-3 text-center" style="font-size: 2rem;">{{ product.name }}</h2>
             <hr>
-            <p class="card-text fs-5 mb-2"><strong>Категория:</strong> {{ product.category.name }}</p>
-            <p class="card-text fs-5 mb-2"><strong>Цена:</strong> <span style="color: #0d6efd;">{{ product.price }} ₸</span></p>
-            <p class="card-text fs-5"><strong>Описание:</strong></p>
+            <p class="card-text fs-5 mb-2"><strong>{% trans "Категория" %}:</strong> {{ product.category.name }}</p>
+            <p class="card-text fs-5 mb-2"><strong>{% trans "Цена" %}:</strong> <span style="color: #0d6efd;">{{ product.price }} ₸</span></p>
+            <p class="card-text fs-5"><strong>{% trans "Описание" %}:</strong></p>
             <p class="text-muted" style="font-size: 1.1rem;">{{ product.description }}</p>
 
             <div class="text-center mt-4 d-flex justify-content-center gap-3 flex-wrap">
                 <form method="post" action="{% url 'add-to-cart' product.id %}" class="d-inline">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-outline-primary btn-lg px-4 py-2 rounded-pill">
-                        🛒 В корзину
+                        🛒 {% trans "В корзину" %}
                     </button>
                 </form>
-                <!-- Кнопка для открытия модального окна -->
                 <button class="btn btn-success btn-lg px-4 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#orderModal">
-                    Купить
+                    {% trans "Купить" %}
                 </button>
                 <a href="{% url 'home' %}" class="btn btn-lg btn-gradient px-5 py-2 rounded-pill"
                    style="background: linear-gradient(90deg, #0d6efd, #6610f2); color: white; font-weight: 500;">
-                    ⬅ Назад ко всем товарам
+                    ⬅ {% trans "Назад ко всем товарам" %}
                 </a>
             </div>
         </div>
@@ -46,33 +46,33 @@
       <form method="post" action="{% url 'make-order' %}">
         {% csrf_token %}
         <div class="modal-header">
-          <h5 class="modal-title" id="orderModalLabel">Оформление заказа</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+          <h5 class="modal-title" id="orderModalLabel">{% trans "Оформление заказа" %}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans 'Закрыть' %}"></button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label for="phone" class="form-label">Телефон</label>
+            <label for="phone" class="form-label">{% trans "Телефон" %}</label>
             <input type="text" class="form-control" id="phone" name="phone" required>
           </div>
           <div class="mb-3">
-            <label for="country" class="form-label">Страна</label>
+            <label for="country" class="form-label">{% trans "Страна" %}</label>
             <input type="text" class="form-control" id="country" name="country" required>
           </div>
           <div class="mb-3">
-            <label for="address" class="form-label">Адрес</label>
+            <label for="address" class="form-label">{% trans "Адрес" %}</label>
             <input type="text" class="form-control" id="address" name="address" required>
           </div>
           <div class="mb-3">
-            <label class="form-label">Способ оплаты</label>
+            <label class="form-label">{% trans "Способ оплаты" %}</label>
             <select class="form-select" name="payment_method" required>
-              <option value="card">Картой</option>
-              <option value="cash">Наличными</option>
+              <option value="card">{% trans "Картой" %}</option>
+              <option value="cash">{% trans "Наличными" %}</option>
             </select>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-          <button type="submit" class="btn btn-primary">Оформить заказ</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Отмена" %}</button>
+          <button type="submit" class="btn btn-primary">{% trans "Оформить заказ" %}</button>
         </div>
       </form>
     </div>
