@@ -21,16 +21,20 @@ from django.conf import settings
 from django.conf.urls.static import static
 from shop.views import home  
 from django.contrib.auth import views as auth_views  
-
+from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
+    path('admin/', admin.site.urls),  
+    path('i18n/', include('django.conf.urls.i18n')),
+]
+
+urlpatterns += i18n_patterns(
     path('', home, name='home'),  
     path('user/', include('user.urls')),  
     path('shop/', include('shop.urls')),  
-    path('admin/', admin.site.urls),  
     path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'), 
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),  
-]
+)
 
 # Добавляем маршруты для медиафайлов в режиме DEBUG
 if settings.DEBUG:

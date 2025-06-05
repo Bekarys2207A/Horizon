@@ -1,10 +1,20 @@
 {% extends 'shop/base.html' %}
+{% load i18n %}
+
 {% block content %}
-<h2>{{ view.object.pk|yesno:"Редактировать товар,Добавить товар" }}</h2>
+<h2>
+    {% if view.object.pk %}
+        {% trans "Редактировать товар" %}
+    {% else %}
+        {% trans "Добавить товар" %}
+    {% endif %}
+</h2>
+
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Сохранить</button>
+    <button type="submit" class="btn btn-success">{% trans "Сохранить" %}</button>
 </form>
-<a href="{% url 'product-list' %}" class="btn btn-secondary mt-2">Назад</a>
+
+<a href="{% url 'product-list' %}" class="btn btn-secondary mt-2">{% trans "Назад" %}</a>
 {% endblock %}
