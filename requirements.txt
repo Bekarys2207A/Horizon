@@ -4,4 +4,6 @@ sqlparse==0.5.3
 gunicorn
 dj-database-url
 whitenoise
+certifi
 psycopg2-binary
+
