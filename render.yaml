@@ -2,6 +2,7 @@ services:
   - type: web
     name: horizon
     env: python
+    pythonVersion: 3.10.11
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn horizweb.wsgi
@@ -14,8 +15,6 @@ services:
           property: connectionString
       - key: DEBUG
         value: False
-      - key: EMAIL_PASSWORD
-        value: твой_пароль_от_почты
 databases:
   - name: horizon-db
     plan: free
