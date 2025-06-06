@@ -6,4 +6,4 @@ dj-database-url
 whitenoise
 certifi
 psycopg2-binary
-
+django-modeltranslation
