@@ -18,8 +18,12 @@ def main():
 
     if os.environ.get('CREATE_SUPERUSER') == '1':
         User = get_user_model()
-        if not User.objects.filter(username='admin').exists():
-            User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
+        if not User.objects.filter(email='admin@example.com').exists():
+            User.objects.create_superuser(
+                email='admin@example.com',
+                username='admin',
+                password='admin123'
+            )
     execute_from_command_line(sys.argv)
 
 
